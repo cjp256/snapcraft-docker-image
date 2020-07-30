@@ -31,4 +31,5 @@ RUN /usr/bin/snap-install core
 RUN /usr/bin/snap-install core18
 RUN /usr/bin/snap-install snapcraft $SNAPCRAFT_CHANNEL
 
+ENV PATH="/snap/bin:$PATH"
 CMD /snap/bin/snapcraft
