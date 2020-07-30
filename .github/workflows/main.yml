@@ -19,7 +19,34 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build and push Docker images
+    - name: Publish snapcraft stable on core
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: cjp256/snapcraft-docker-image
+        tags: stable
+        build_args: SNAPCRAFT_CHANNEL=stable,UBUNTU_VERSION=16.04
+
+    - name: Publish snapcraft beta on core
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: cjp256/snapcraft-docker-image
+        tags: beta
+        build_args: SNAPCRAFT_CHANNEL=beta,UBUNTU_VERSION=16.04
+
+    - name: Publish snapcraft candidate on core
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: cjp256/snapcraft-docker-image
+        tags: candidate
+        build_args: SNAPCRAFT_CHANNEL=candidate,UBUNTU_VERSION=16.04
+
+    - name: Publish snapcraft edge on core
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -27,3 +54,39 @@ jobs:
         repository: cjp256/snapcraft-docker-image
         tags: edge
         build_args: SNAPCRAFT_CHANNEL=edge,UBUNTU_VERSION=16.04
+
+    - name: Publish snapcraft stable on core18
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: cjp256/snapcraft-docker-image
+        tags: stable-core18
+        build_args: SNAPCRAFT_CHANNEL=stable,UBUNTU_VERSION=18.04
+
+    - name: Publish snapcraft beta on core18
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: cjp256/snapcraft-docker-image
+        tags: beta-core18
+        build_args: SNAPCRAFT_CHANNEL=beta,UBUNTU_VERSION=18.04
+
+    - name: Publish snapcraft candidate on core18
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: cjp256/snapcraft-docker-image
+        tags: candidate-core18
+        build_args: SNAPCRAFT_CHANNEL=candidate,UBUNTU_VERSION=18.04
+
+    - name: Publish snapcraft edge on core18
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: cjp256/snapcraft-docker-image
+        tags: edge-core18
+        build_args: SNAPCRAFT_CHANNEL=edge,UBUNTU_VERSION=18.04
