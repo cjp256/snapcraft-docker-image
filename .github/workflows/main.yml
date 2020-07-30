@@ -14,7 +14,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  deploy-core-images:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -54,6 +54,11 @@ jobs:
         repository: cjp256/snapcraft-docker-image
         tags: edge
         build_args: SNAPCRAFT_CHANNEL=edge,UBUNTU_VERSION=16.04
+
+  deploy-core18-images:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
 
     - name: Publish snapcraft stable on core18
       uses: docker/build-push-action@v1
