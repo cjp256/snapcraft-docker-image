@@ -1,0 +1,12 @@
+#!/bin/sh
+
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US:en"
+export LC_ALL="en_US.UTF-8"
+export PATH="/snap/bin:$PATH"
+export SNAP="/snap/snapcraft/current"
+export SNAP_NAME="snapcraft"
+export SNAP_ARCH="amd64"
+export SNAP_VERSION="$(awk '/^version:/{print $2}' /snap/snapcraft/current/meta/snap.yaml)"
+
+exec "$SNAP/usr/bin/python3" "$SNAP/bin/snapcraft" "$@"

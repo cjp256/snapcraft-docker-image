@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+snap_name="$1"
+snap_channel=${2:-stable}
+snap_file="/tmp/${snap_name}.snap"
+snap_install_target="/tmp/snap/${snap_name}"
+
+echo "Querying URL for snap=\"${snap_name}\" channel=\"${snap_channel}\"..."
+download_url="$(curl -s -H "X-Ubuntu-Series: 16" "https://api.snapcraft.io/api/v1/snaps/details/${snap_name}?channel=${snap_channel}" | jq .download_url -r)"
+
+echo "URL: ${download_url}"
+
+echo "Downloading snap..."
+curl -s -L "${download_url}" --output "${snap_file}"
+
+echo "Unpacking snap to: ${snap_install_target}/current"
+mkdir -p "${snap_install_target}"
+unsquashfs -n -d "${snap_install_target}/current" "${snap_file}"
