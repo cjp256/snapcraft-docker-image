@@ -20,9 +20,16 @@ following images are available as tags:
 By default, the `edge` image will be built. Pass `--build-arg SNAPCRAFT_CHANNEL=<channel>`
 to override the channel.
 
+By default, the image will be Ubuntu 16.04.  Pass `--build-arg UBUNTU_VERSION=<version>`
+to override the ubuntu image.
+
 To build:
 
-    docker build --no-cache --tag snapcore/snapcraft:<snapcraft-channel> --build-arg SNAPCRAFT_CHANNEL=<channel> .
+    docker build --no-cache --tag snapcore/snapcraft .
+
+To build with custom snapcraft channel and ubuntu version:
+
+    docker build --no-cache --tag snapcore/snapcraft --build-arg SNAPCRAFT_CHANNEL=edge --build-arg UBUNTU_VERSION=18.04 .
 
 You can push that image with:
 
